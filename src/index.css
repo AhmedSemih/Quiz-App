@@ -210,6 +210,10 @@
   border: 1px solid #161680;
 }
 
+.correct-answer{
+  background-color: #00D100;
+}
+
 .correct{
   animation: correct 3s ease forwards;
 }
