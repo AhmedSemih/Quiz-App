@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const QuestionArea = ({ questions, currentQuestion, setCurrentQuestion, setStop }) => {
-  const [currentClass, setCurrentClass] = useState("answer");
+const QuestionArea = ({ questions, currentQuestion, setCurrentQuestion, setStop, currentClass, setCurrentClass }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [isWrong,setIsWrong]=useState(false);
 
   const handleClick = (answer) => {
     if (selectedAnswer === null) {
@@ -11,12 +11,16 @@ const QuestionArea = ({ questions, currentQuestion, setCurrentQuestion, setStop 
 
       setTimeout(()=>{
         setCurrentClass(answer.isCorrect ? "answer correct" : "answer wrong");
-      },3000)
+      },3000);
+
+      setTimeout(()=>{
+        !answer.isCorrect && setIsWrong(true);
+      },5300);
 
       setTimeout(()=>{
         setSelectedAnswer(null)
-        if (answer.isCorrect) {
-          setCurrentQuestion((prev) => prev + 1);
+        if (answer.isCorrect && currentQuestion+1 < 15) {
+            setCurrentQuestion((prev) => prev + 1);
         } else {
           setStop(true);
         }
@@ -36,7 +40,7 @@ const QuestionArea = ({ questions, currentQuestion, setCurrentQuestion, setStop 
               <div
                 key={index}
                 onClick={() => handleClick(answer)}
-                className={selectedAnswer === answer ? currentClass : "answer"}
+                className={selectedAnswer === answer ? currentClass : (isWrong && answer.isCorrect ? "answer correct-answer" :"answer")}
               >
                 {answer.text}
               </div>

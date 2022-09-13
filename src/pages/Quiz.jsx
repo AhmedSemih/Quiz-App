@@ -12,38 +12,52 @@ const Quiz = () => {
   const [currentClass, setCurrentClass] = useState("answer");
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [questions, setQuestions] = useState([]);
+  const [earned, setEarned] = useState(0);
   const [stop, setStop] = useState(false);
 
   useEffect(() => {
-    setQuestions(questionSelector(Easy, Medium, Hard));
-  }, []);
+    !stop && setQuestions(questionSelector(Easy, Medium, Hard));
+  }, [stop]);
 
-  useEffect(()=>{
-    setCurrentClass("answer")
-  },[currentQuestion]);
+  useEffect(() => {
+    setCurrentClass("answer");
+  }, [currentQuestion]);
 
   return (
     <div className="quiz-main">
       <div className="question-side">
         {
           stop 
-          ? 
-          <Result />
+          ?
+          <Result
+            earned={earned}
+            setStop={setStop}
+            setCurrentClass={setCurrentClass}
+            setCurrentQuestion={setCurrentQuestion}
+          />
           :
           <>
-          <Timer setStop={setStop} currentQuestion={currentQuestion} currentClass={currentClass} />
-          <QuestionArea
-            questions={questions.length > 0 && questions}
-            currentQuestion={currentQuestion - 1}
-            setCurrentQuestion={setCurrentQuestion}
-            setStop={setStop}
-            currentClass={currentClass}
-            setCurrentClass={setCurrentClass}
-          />
+            <Timer
+              setStop={setStop}
+              currentQuestion={currentQuestion}
+              currentClass={currentClass}
+            />
+            <QuestionArea
+              questions={questions.length > 0 && questions}
+              currentQuestion={currentQuestion - 1}
+              setCurrentQuestion={setCurrentQuestion}
+              setStop={setStop}
+              currentClass={currentClass}
+              setCurrentClass={setCurrentClass}
+            />
           </>
         }
       </div>
-      <MoneyTree currentQuestion={currentQuestion} stop={stop} />
+      <MoneyTree
+        currentQuestion={currentQuestion}
+        stop={stop}
+        setEarned={setEarned}
+      />
     </div>
   );
 };
