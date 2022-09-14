@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../assets/logo.png'
+import useSound from 'use-sound';
+
+import Logo from '../assets/logo.png';
+import Play from '../assets/sounds/play.mp3';
 
 const Start = () => {
   const navigate=useNavigate();
+  const [playSound]=useSound(Play)
   const [record]=useState(localStorage.getItem("highScore") || null);
 
   const handleClick=()=>{
+    playSound();
     navigate('/quiz');
   };
 

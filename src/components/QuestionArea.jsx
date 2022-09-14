@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import useSound from 'use-sound';
+
+import Play from '../assets/sounds/play.mp3';
+import Correct from '../assets/sounds/correct.mp3';
+import Wrong from '../assets/sounds/wrong.mp3';
 
 const QuestionArea = ({ questions, currentQuestion, setCurrentQuestion, setStop, currentClass, setCurrentClass }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isWrong,setIsWrong]=useState(false);
+
+  const [playSound]=useSound(Play);
+  const [correctSound,{stop}]=useSound(Correct);
+  const [wrongSound]=useSound(Wrong);
+  
+  useEffect(()=>{
+    stop();
+    playSound();
+  },[currentQuestion]);
 
   const handleClick = (answer) => {
     if (selectedAnswer === null) {
@@ -14,8 +28,13 @@ const QuestionArea = ({ questions, currentQuestion, setCurrentQuestion, setStop,
       },3000);
 
       setTimeout(()=>{
-        !answer.isCorrect && setIsWrong(true);
-      },5300);
+        if(answer.isCorrect){
+          correctSound();
+        }else{
+          wrongSound();
+          setIsWrong(true);
+        }
+      },4800);
 
       setTimeout(()=>{
         setSelectedAnswer(null)
@@ -24,7 +43,7 @@ const QuestionArea = ({ questions, currentQuestion, setCurrentQuestion, setStop,
         } else {
           setStop(true);
         }
-      },6000);
+      },9000);
     }
   };
 

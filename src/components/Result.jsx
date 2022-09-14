@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import useSound from 'use-sound';
+
+import Play from '../assets/sounds/play.mp3';
 import Logo from '../assets/logo.png';
 
 const Result = ({earned, setStop, setCurrentQuestion, setCurrentClass}) => {
+
+  const [playSound]=useSound(Play);
   const [record]=useState(Number(localStorage.getItem("highScore")) || 0);
 
   const handleClick=()=>{
+    playSound();
     setCurrentClass("answer");
     setCurrentQuestion(1);
     setStop(false);
