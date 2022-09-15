@@ -263,7 +263,7 @@
     width: 80px;
     height: 80px;
     font-size: 36px;
-    left: 15%;
+    left: 25%;
   }
 }
 
@@ -282,7 +282,19 @@
     flex-direction: column;
   }
   .timer-area{
-    left:28%;
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .timer{
+    position: relative;
+    text-align: center;
+    left: 0px;
+  }
+  .question-area{
+    padding: 10px;
+    height: 85vh;
   }
 }
 
