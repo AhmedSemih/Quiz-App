@@ -57,6 +57,7 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  overflow: hidden;
 }
 
 .question-side {
@@ -222,6 +223,31 @@
   animation: wrong 3s ease forwards;
 }
 
+/* ANIMATIONS */
+@keyframes wrong{
+  0%, 22%, 42%{
+    background-color: #161680;
+  }
+  20%, 40%, 60%{
+    background-color: #020230;
+  }
+  62%, 100%{
+    background-color: #dc143c;
+  }
+}
+
+@keyframes correct{
+  0%, 22%, 42%{
+    background-color: #161680;
+  }
+  20%, 40%, 60%{
+    background-color: #020230;
+  }
+  62%, 100%{
+    background-color: #00D100;
+  }
+}
+
 /* RESPONSIVE */
 @media (max-width:400px){
   .question{
@@ -232,6 +258,12 @@
   }
   .answers{
     gap: 16px;
+  }
+  .timer{
+    width: 80px;
+    height: 80px;
+    font-size: 36px;
+    left: 15%;
   }
 }
 
@@ -274,7 +306,7 @@
   .start-btn{
     margin-top: 36px
   }
-};
+}
 
 @media (max-width: 1300px){
   .money-tree{
@@ -284,31 +316,6 @@
     margin: 2px;
     padding: 8px;
   }
-};
-
-
-
-/* ANIMATIONS */
-@keyframes wrong{
-  0%, 22%, 42%{
-    background-color: #161680;
-  }
-  20%, 40%, 60%{
-    background-color: #020230;
-  }
-  62%, 100%{
-    background-color: #dc143c;
-  }
 }
 
-@keyframes correct{
-  0%, 22%, 42%{
-    background-color: #161680;
-  }
-  20%, 40%, 60%{
-    background-color: #020230;
-  }
-  62%, 100%{
-    background-color: #00D100;
-  }
-};
+
